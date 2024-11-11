@@ -20,9 +20,9 @@ namespace MLIMS.Services
             return await _repository.GetAllAsync();
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<dynamic?> GetByIdAsync(int id, string langCode)
         {
-            return await _repository.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id, langCode);
         }
 
         public virtual async Task<T> UpdateAsync(T entity)

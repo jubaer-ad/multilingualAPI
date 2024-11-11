@@ -17,7 +17,7 @@ namespace MLIMS.Repositories
             return await _ctx.Set<T>().ToListAsync();
         }
 
-        public virtual async Task<T?> GetByIdAsync(int id)
+        public virtual async Task<dynamic?> GetByIdAsync(int id, string langCode)
         {
             return await _ctx.Set<T>().FindAsync(id);
         }

@@ -21,5 +21,11 @@ namespace MLIMS.Controllers
         {
             return Ok(await _service.GetAllAsync());
         }
+
+        [HttpGet("${langCode}/{id}")]
+        public async Task<IActionResult> GetByIdAsync([FromRoute] int id, [FromRoute] string langCode)
+        {
+            return Ok(await _service.GetByIdAsync(id, langCode));
+        }
     }
 }
