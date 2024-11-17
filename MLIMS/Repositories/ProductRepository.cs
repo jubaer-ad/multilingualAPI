@@ -8,10 +8,13 @@ namespace MLIMS.Repositories
     public class ProductRepository : Repository<Product>
     {
         private readonly MLIMSDbContext _ctx;
+        private readonly LanguageRepository _language;
 
-        public ProductRepository(MLIMSDbContext ctx) : base(ctx)
+        public ProductRepository(MLIMSDbContext ctx,
+            [FromKeyedServices("LangRepo")] LanguageRepository language) : base(ctx)
         {
             _ctx = ctx;
+            _language = language;
         }
 
         public override async Task<IEnumerable<object>> GetAllAsync()
@@ -44,6 +47,7 @@ namespace MLIMS.Repositories
 
         public override async Task<object?> GetByIdAsync(int id, string langCode)
         {
+            langCode = await _language.CheckAndResolveByCodeAsync(langCode);
             return await _ctx.Set<Product>()
                 .Where(p => p.Id == id)
                 .Include(p => p.ProductTranslations.Where(t => t.LanguageCode == langCode))

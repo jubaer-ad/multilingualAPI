@@ -13,6 +13,7 @@ namespace MLIMS.DI
 
             services.AddKeyedScoped<Repository<Category>, CategoryRepository>("CategoryRepository");
             services.AddKeyedScoped<Service<Category>, CategoryService>("CategoryService");
+            services.AddKeyedScoped<LanguageRepository>("LangRepo");
         }
     }
 }
